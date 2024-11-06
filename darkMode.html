@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode / Light Mode Toggle</title>
+    <style>
+       
+        body {
+            background-color: white;
+            color: black;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+
+
+        .toggle-button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #ddd;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dark Mode / Light Mode Toggle</h1>
+    <button id="toggleButton" class="toggle-button">Toggle Dark Mode</button>
+
+    <script>
+        function setTheme(mode) {
+            if (mode === 'dark') {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+                toggleButton.textContent = 'Switch to Light Mode';
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+                toggleButton.textContent = 'Switch to Dark Mode';
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        const toggleButton = document.getElementById('toggleButton');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        }
+
+        toggleButton.addEventListener('click', () => {
+            const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+    </script>
+
+</body>
+</html>
